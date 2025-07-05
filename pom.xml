@@ -49,7 +49,7 @@
 		<dependency>
 			<groupId>6f61697f-c45e-48b0-932b-ed704278dfab</groupId>
 			<artifactId>sample-awards</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1</version>
 			<classifier>oas</classifier>
 			<type>zip</type>
 		</dependency>

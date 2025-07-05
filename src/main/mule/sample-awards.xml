@@ -5,7 +5,7 @@ http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/fil
     <http:listener-config name="sample-awards-httpListenerConfig">
         <http:listener-connection host="0.0.0.0" port="8081" />
     </http:listener-config>
-    <apikit:config name="sample-awards-config" api="resource::6f61697f-c45e-48b0-932b-ed704278dfab:sample-awards:1.0.0:oas:zip:sample-awards.yaml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
+    <apikit:config name="sample-awards-config" api="resource::6f61697f-c45e-48b0-932b-ed704278dfab:sample-awards:1.0.1:oas:zip:sample-awards.yaml" outboundHeadersMapName="outboundHeaders" httpStatusVarName="httpStatus" />
     <api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="a3e2d50f-9b18-492d-a705-58019cbdeafc" flowRef="sample-awards-main" />
 	<flow name="sample-awards-main">
         <http:listener config-ref="sample-awards-httpListenerConfig" path="/api/*">
@@ -112,7 +112,7 @@ var awardStartDate=attributes.queryParams.awardDateStart as Date {format: "yyyy-
 var awardEndDate=attributes.queryParams.awardDateEnd as Date {format: "yyyy-MM-dd"}
  
 ---
-(readUrl("classpath://ssa.hq.awards.json", "application/json")).hq_awards
+"awards": (readUrl("classpath://ssa.hq.awards.json", "application/json")).hq_awards
 filter ($.award_date as Date {format: "yyyy-MM-dd"} >= awardStartDate
 and $.award_date as Date {format: "yyyy-MM-dd"} <= awardEndDate
 and (lower($.contractor) startsWith lower(attributes.queryParams.contractor)))]]></ee:set-payload>
@@ -125,7 +125,7 @@ and (lower($.contractor) startsWith lower(attributes.queryParams.contractor)))]]
 						<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-(readUrl("classpath://ssa.hq.awards.json", "application/json")).hq_awards
+"awards": (readUrl("classpath://ssa.hq.awards.json", "application/json")).hq_awards
 filter (lower($.contractor) startsWith lower(attributes.queryParams.contractor))]]></ee:set-payload>
 					</ee:message>
 				</ee:transform>
